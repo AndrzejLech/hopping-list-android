@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shoppinglist.R
 import com.shoppinglist.adapters.CategoriesAdapter
 import com.shoppinglist.databinding.FragmentListBinding
-import com.shoppinglist.repositories.ShoppingListRepository
 import com.shoppinglist.view.MainActivity
 import com.shoppinglist.view.list.viewmodel.ListViewModel
 import com.shoppinglist.view.list.viewmodel.ListViewState
@@ -56,14 +55,19 @@ class ListFragment(
         }
 
         viewModel.error.observe(viewLifecycleOwner) { listViewState ->
-            when(listViewState){
+            when (listViewState) {
                 is ListViewState.EmptyList -> {
                 }
                 is ListViewState.UnexpectedError -> {
-                    Toast.makeText(requireContext(), "Unexpected Error occurred", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Unexpected Error occurred",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 is ListViewState.FailedToUpdate -> {
-                    Toast.makeText(requireContext(), "Failed to update Entity", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to update Entity", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 is ListViewState.Items -> {}
                 else -> {}
@@ -78,7 +82,7 @@ class ListFragment(
         }
 
         if (savedInstanceState == null) {
-            Log.i(TAG,"savedInstanceState is null, calling getCategories()")
+            Log.i(TAG, "savedInstanceState is null, calling getCategories()")
             viewModel.getCategories()
         }
     }

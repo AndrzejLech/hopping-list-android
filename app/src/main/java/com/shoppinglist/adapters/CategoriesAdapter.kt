@@ -27,7 +27,7 @@ class CategoriesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, position)
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(
@@ -58,7 +58,7 @@ class CategoriesAdapter(
             }
         }
 
-        fun bind(category: Category, position: Int) {
+        fun bind(category: Category) {
             binding.categoryName.text = category.name
             val productRecycler = binding.productRecycler
             getProducts(category.id)
